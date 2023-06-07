@@ -1,7 +1,7 @@
 from math import ceil
 
 
-class register:
+class Register:
     def __init__(self,number_of_bits =16 ,initial_value="") -> None:
         self.number_of_bits = number_of_bits
         self._reg_value = initial_value
@@ -56,7 +56,7 @@ class register:
 
 
 if __name__ == "__main__":
-    A = register(13,"1111111111")
+    A = Register(13,"1111111111")
     print(A.read_binary())
     print(A.read_hex())
     print(A.read_dec())

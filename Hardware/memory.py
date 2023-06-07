@@ -1,10 +1,10 @@
 from register import *
 
-class memory:
+class Memory:
     def __init__(self, block_size, address_size) -> None:
         self.memory = []
         for i in range(2**address_size):
-            self.memory.append(register(block_size, "0"*block_size))
+            self.memory.append(Register(block_size, "0"*block_size))
 
     def read(self,address, type):
         if type == "b":
@@ -18,7 +18,7 @@ class memory:
         self.memory[address].write(value,type)
 
 if __name__ == "__main__":
-    A = memory(16, 10)
+    A = Memory(16, 10)
     A.write(0,"0b1111111111111111","b")
     print(A.read(0,"b"))
     print(A.read(0,"d"))
