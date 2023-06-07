@@ -15,6 +15,9 @@ class Memory:
             return self.memory[address].read_hex()
 
     def write(self,address,value, type):
+        # adress should be decimal
+        # type can be b, h, d for binary, hex, decimal
+        # the value should be in correct format
         self.memory[address].write(value,type)
 
 if __name__ == "__main__":

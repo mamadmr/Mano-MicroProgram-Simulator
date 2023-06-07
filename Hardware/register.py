@@ -14,6 +14,12 @@ class Register:
     def _reg_value(self,value):
         self._value = self.normalize(value,self.number_of_bits)
 
+    def assign_bits(self, value, start, end):
+        # assign the value to the bits from start to end (inclusive)
+        if end-start+1 != len(value):
+            raise Exception("The length of the value should be equal to end-start+1")
+        self._reg_value = self._reg_value[:start] + value + self._reg_value[end+1:]
+
     def normalize(self, value, number_of_bits):
         if len(value) <= number_of_bits:
             # add zeros to the left side
