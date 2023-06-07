@@ -30,5 +30,17 @@ class AllMemory:
         self.flag["CAR_flag"] = 0
         self.flag["SBR_flag"] = 0
 
+    def check_flag(self):
+        temp = []
+        for i in self.flag.values():
+            if type(i) == list:
+                temp.extend(i)
+            else:
+                temp.append(i)
+        for i in temp:
+            if i > 1:
+                return False
+        return True
+    
 if __name__ == "__main__":
     pass
