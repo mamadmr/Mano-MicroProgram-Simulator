@@ -1,4 +1,4 @@
-from register import *
+from register import Register
 
 class Memory:
     def __init__(self, block_size, address_size) -> None:
