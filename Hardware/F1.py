@@ -40,8 +40,8 @@ class F1:
         self.memory.flag["AC_flag"] += 1
 
     def isz_101(self):
-        # AR <- DR[0:10]
-        self.memory.AR.write(self.memory.DR.read_binary()[0:10], "b")
+        # AR <- DR[10:0]
+        self.memory.AR.write(self.memory.DR.read_binary()[-10:], "b")
         self.memory.flag["AR_flag"] += 1
 
     def isz_110(self):
