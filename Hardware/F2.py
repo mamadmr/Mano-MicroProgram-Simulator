@@ -50,5 +50,6 @@ class F2:
         self.memory.flag["DR_flag"] += 1
 
     def isz_111(self):
-        #DR[0:10] <- PC
-        pass
+        #DR[10:0] <- PC
+        self.memory.DR.assign_bits(self.memory.PC.read_binary()[-10:], -10, len(self.memory.DR.read_binary()))
+        self.memory.flag["DR_flag"] += 1
