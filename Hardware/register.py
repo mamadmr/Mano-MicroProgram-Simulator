@@ -2,7 +2,7 @@ from math import ceil
 
 
 class Register:
-    def __init__(self, number_of_bits: int = 16, initial_value: str = "") -> None:
+    def __init__(self, number_of_bits: int = 16, initial_value: str = "0b0") -> None:
         """
         A class representing a register.
 
