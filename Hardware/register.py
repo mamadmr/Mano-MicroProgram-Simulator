@@ -170,7 +170,7 @@ class Register:
             output = "0" * (len_out - len(output)) + output
 
         # Add the prefix "0h" to the hexadecimal value
-        return '0h' + output 
+        return '0x' + output 
 
     def read_dec(self) -> int:
         """
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     assert reg.read_binary() == '0b10000000'
 
     # Test the read_hex method
-    assert reg.read_hex() == '0h80'
+    assert reg.read_hex() == '0x80'
 
     # Test the read_dec method
     assert reg.read_dec() == 128
