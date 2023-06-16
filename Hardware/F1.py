@@ -22,46 +22,29 @@ class F1:
     def isz_001(self):
         # AC <- AC + DR
         self.memory.AC.write(self.memory.AC.read_dec()+ self.memory.DR.read_dec(), "d")
-        self.memory.flag["AC_flag"] += 1
 
     def isz_010(self):
         # AC <- 0
-        self.memory.AC.write("0b0000000000000000", "b")
-        self.memory.flag["AC_flag"] += 1
+        self.memory.AC.write("0b0", "b")
 
     def isz_011(self):
         # AC <- AC + 1
         self.memory.AC.write(self.memory.AC.read_dec()+1, "d")
-        self.memory.flag["AC_flag"] += 1
 
     def isz_100(self):
         # AC <- DR
         self.memory.AC.write(self.memory.DR.read_dec(), "d")
-        self.memory.flag["AC_flag"] += 1
 
     def isz_101(self):
         # AR <- DR[10:0]
-        self.memory.AR.write(self.memory.DR.read_binary()[-10:], "b")
-        self.memory.flag["AR_flag"] += 1
+        # the indexing in the book is right to leftbut in str it is left to right
+        # the write data in bainary should have '0b' in the begining
+        self.memory.AR.write('0b'+self.memory.DR.read_binary()[-11:], "b")
 
     def isz_110(self):
         # AR <- PC
         self.memory.AR.write(self.memory.PC.read_binary(), "b")
-        self.memory.flag["AR_flag"] += 1
 
     def isz_111(self):
         # M[AR] <- DR
         self.memory.main_memory.write(self.memory.AR.read_dec(), self.memory.DR.read_binary(), "b")
-        self.memory.flag["main_memory_flag"][self.memory.AR.read_dec()] += 1
-
-
-if __name__ == "__main__":
-    mem = AllMemory()
-    A = F1(mem)
-    B = F1(mem)
-
-    A.instruction("001")
-    A.instruction("001")
-    B.instruction("001")
-    B.instruction("001")
-    print(mem.flag['AC_flag'])
