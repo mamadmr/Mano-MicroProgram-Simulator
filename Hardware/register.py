@@ -17,7 +17,23 @@ class Register:
 
         self.number_of_bits = number_of_bits
         self._reg_value = initial_value
-    
+        # the flag is used to check if the register write more than once in the single clock cycle
+        self._flag = 0
+
+    def reset_flag(self):
+        """
+        Reset the flag to 0.
+        """
+        self._flag = 0
+
+    def check_flag(self):
+        """
+        Check if the register write more than once in the single clock cycle.
+
+        :return: True if the register write more than once in the single clock cycle, False otherwise.
+        """
+        return self._flag > 1
+
     def test_bits(self, value: str) -> bool:
         """
         Test if all the bits in the value are either 0 or 1.
@@ -84,6 +100,9 @@ class Register:
         the indexing is from right to left just like the mano book.
         """
 
+        #increment the flag
+        self._flag += 1
+
         # Check for valid input
         value = self.check_bainary_format(value)
 
@@ -131,6 +150,10 @@ class Register:
             '0b' for binary, '0h' for hexadecimal
         :param type: The type of the value (b for binary, h for hex, d for decimal).
         """
+
+        #increment the flag
+        self._flag += 1
+
         # Check the type of the value and convert it to binary
         if type == "b":
             # If the type is binary

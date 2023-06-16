@@ -68,6 +68,30 @@ class Memory:
         if address < 0 or address >= len(self.memory):
             # If the address is out of bounds, raise an IndexError
             raise IndexError("Address out of bounds")
+    
+    def reset_flags(self):
+        """
+        Reset the flag for all memory blocks.
+
+        This method resets the flag for all memory blocks in the memory. The flag is used to indicate whether the memory block has been accessed or not.
+        """
+        # Loop through all memory blocks and reset their flags
+        for i in self.memory:
+            i.reset_flag()
+    
+    def check_flags(self):
+        """
+        Check if any memory blocks have been accessed.
+
+        :return: True if any memory blocks have been accessed, False otherwise.
+        """
+        # Loop through all memory blocks and check if any have been accessed
+        for i in self.memory:
+            if i.check_flag():
+                # If a memory block has been accessed, return True
+                return True
+        # If no memory blocks have been accessed, return False
+        return False
 
 if __name__ == "__main__":
     # Test the initialization of a new Memory object
