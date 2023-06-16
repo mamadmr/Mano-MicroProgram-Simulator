@@ -38,5 +38,3 @@ class AllMemory:
         self.main_memory.check_flags()
         self.control_memory.check_flags()
     
-if __name__ == "__main__":
-    pass
