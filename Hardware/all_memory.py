@@ -16,31 +16,27 @@ class AllMemory:
         self.CAR = Register(7)
         self.SBR = Register(7)
 
-        # I will use the flag to check if the register is used or not in the single clock cycle
-        self.flag = dict()
         self.reset_flag()
     
     def reset_flag(self):
-        self.flag["main_memory_flag"] = [0] * 2 ** 11
-        self.flag["control_memory_flag"] = [0] * 2 ** 7
-        self.flag["AR_flag"] = 0
-        self.flag["PC_flag"] = 0
-        self.flag["DR_flag"] = 0
-        self.flag["AC_flag"] = 0
-        self.flag["CAR_flag"] = 0
-        self.flag["SBR_flag"] = 0
+        self.AR_flag.reset_flag()
+        self.PC_flag.reset_flag()
+        self.DR_flag.reset_flag()
+        self.AC_flag.reset_flag()
+        self.CAR_flag.reset_flag()
+        self.SBR_flag.reset_flag()
+        self.main_memory.reset_flags()
+        self.control_memory.reset_flags()
 
-    def check_flag(self):
-        temp = []
-        for i in self.flag.values():
-            if type(i) == list:
-                temp.extend(i)
-            else:
-                temp.append(i)
-        for i in temp:
-            if i > 1:
-                return False
-        return True
+    def check_flags(self):
+        self.AR_flag.check_flag()
+        self.PC_flag.check_flag()
+        self.DR_flag.check_flag()
+        self.AC_flag.check_flag()
+        self.CAR_flag.check_flag()
+        self.SBR_flag.check_flag()
+        self.main_memory.check_flags()
+        self.control_memory.check_flags()
     
 if __name__ == "__main__":
     pass
