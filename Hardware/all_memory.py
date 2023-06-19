@@ -19,12 +19,13 @@ class AllMemory:
         self.reset_flag()
     
     def reset_flag(self):
-        self.AR_flag.reset_flag()
-        self.PC_flag.reset_flag()
-        self.DR_flag.reset_flag()
-        self.AC_flag.reset_flag()
-        self.CAR_flag.reset_flag()
-        self.SBR_flag.reset_flag()
+        self.AR : Register
+        self.AR.reset_flag()
+        self.PC.reset_flag()
+        self.DR.reset_flag()
+        self.AC.reset_flag()
+        self.CAR.reset_flag()
+        self.SBR.reset_flag()
         self.main_memory.reset_flags()
         self.control_memory.reset_flags()
 
