@@ -30,12 +30,13 @@ class AllMemory:
         self.control_memory.reset_flags()
 
     def check_flags(self):
-        self.AR_flag.check_flag()
-        self.PC_flag.check_flag()
-        self.DR_flag.check_flag()
-        self.AC_flag.check_flag()
-        self.CAR_flag.check_flag()
-        self.SBR_flag.check_flag()
-        self.main_memory.check_flags()
-        self.control_memory.check_flags()
-    
+        ans = 0
+        ans += self.AR_flag.check_flag()
+        ans += self.PC_flag.check_flag()
+        ans += self.DR_flag.check_flag()
+        ans += self.AC_flag.check_flag()
+        ans += self.CAR_flag.check_flag()
+        ans += self.SBR_flag.check_flag()
+        ans += self.main_memory.check_flags()
+        ans += self.control_memory.check_flags()
+        return ans > 0
