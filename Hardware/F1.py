@@ -29,7 +29,7 @@ class F1:
                 self.func[i]()
                 break
     
-    def isz_000():
+    def isz_000(self):
         pass
 
     def isz_001(self):
@@ -61,3 +61,51 @@ class F1:
     def isz_111(self):
         # M[AR] <- DR
         self.memory.main_memory.write(self.memory.AR.read_dec(), self.memory.DR.read_binary(), "b")
+
+if __name__ == '__main__':
+    # Initialize a new AllMemory object and a new F1 object
+    mem = AllMemory()
+    f1 = F1(mem)
+
+    # Test the NOP instruction
+    f1.instruction('000')
+    assert mem.AC.read_dec() == 0
+
+    # Test the ADD instruction
+    mem.AC.write(10, "d")
+    mem.DR.write(3, "d")
+    f1.instruction('001')
+    assert mem.AC.read_dec() == 13
+
+    # Test the CLRAC instruction
+    mem.AC.write(10, "d")
+    f1.instruction('010')
+    assert mem.AC.read_dec() == 0
+
+    # Test the INCAC instruction
+    mem.AC.write(10, "d")
+    f1.instruction('011')
+    assert mem.AC.read_dec() == 11
+
+    # Test the DRTAC instruction
+    mem.DR.write(42, "d")
+    f1.instruction('100')
+    assert mem.AC.read_dec() == 42
+
+    # Test the DRTAR instruction
+    mem.DR.write("0b01110111", "b")
+    f1.instruction('101')
+    assert mem.AR.read_binary() == "0b00001110111"
+
+    # Test the PCTAR instruction
+    mem.PC.write(10, "d")
+    f1.instruction('110')
+    assert mem.AR.read_dec() == 10
+
+    # Test the WRITE instruction
+    mem.DR.write(10, "d")
+    mem.AR.write(5, "d")
+    f1.instruction('111')
+    assert mem.main_memory.read(5, 'd') == 10
+
+    print("All tests passed!")
