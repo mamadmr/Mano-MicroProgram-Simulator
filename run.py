@@ -49,6 +49,8 @@ if __name__ == "__main__":
                 READ             U JMP NEXT
                 ACTDR, DRTAC     U JMP NEXT
                 WRITE            U JMP FETCH
+    ORG 16
+    HAL: HAL U JMP
     ORG 64 
     FETCH: PCTAR U JMP NEXT
            READ, INCPC U JMP NEXT
@@ -58,14 +60,15 @@ if __name__ == "__main__":
     
 
     main_code = """ORG 0
-        ADD A1
+        ADD A1 I
         ADD A2 
         ADD A3 
         STORE DEC100
         STORE HEXFF
         STORE BIN1111
+        HAL DEC100
     ORG 1000
-    A1: DEC20
+    A1: DEC1001
     A2: DEC30
     A3: DEC40
     """
@@ -73,7 +76,7 @@ if __name__ == "__main__":
 
     computer = load(micro_code, main_code)
     computer.print_reg()
-    for i in range(20):
+    for i in range(50):
         print(i)
         print('--------------')
         computer.clock()
