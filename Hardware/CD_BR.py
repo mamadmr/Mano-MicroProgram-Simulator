@@ -63,9 +63,8 @@ class BR:
     
     def MAP(self):
         # CAR[0,1,6] = 0, CAR[5:2] = DR[14:11]
-        self.mem.CAR.write(0, "d")
-        opt = '0b' + self.mem.DR.read_binary()[2:][1:5]
-        self.mem.CAR.assign_bits(opt, 2, 5)
+        opt = '0b0' + self.mem.DR.read_binary()[2:][1:5]+'00'
+        self.mem.CAR.write(opt, "b")
 
 
 if __name__ == "__main__":
