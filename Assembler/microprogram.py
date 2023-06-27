@@ -89,7 +89,7 @@ def translate_line(line):
         if i in table:
             AD = dec_to_bin(int(table[i]))
 
-    return ''.join([f1, f2, f3, CD, BR, AD])
+    return ''.join([f1, f2, f3, CD, BR, AD, '-'+str(line[-1])])
 
 
 
@@ -100,7 +100,7 @@ def assembler(code):
     code = list(map(translate_line, code))
     ans = dict()
     for i in table.items():
-        if i[1]%4 == 0:
+        if i[1]%4 == 0 and i[1] < 64:
             ans[i[0]]  = dec_to_bin(i[1])
     return code, ans
 
