@@ -121,7 +121,7 @@ if __name__ == "__main__":
     ORG 12
     EXCHANGE:   NOP              I CALL INDRCT
                 READ             U JMP NEXT
-                ACTOR, DRTAC     U JMP NEXT
+                ACTDR, DRTAC     U JMP NEXT
                 WRITE            U JMP FETCH
     ORG 64 
     FETCH: PCTAR U JMP NEXT
