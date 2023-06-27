@@ -5,7 +5,7 @@ f2_opt = ['000', '001', '010', '011', '100', '101', '110', '111']
 f2_asm = ['NOP', 'SUB', 'OR', 'AND', 'READ', 'ACTDR','INCDR', 'PCTDR']
 
 f3_opt = ['000', '001', '010', '011', '100', '101', '110', '111']
-f3_asm = ['NOP', 'XOR', 'COM', 'SHL', 'SHR', 'INCPC','ARTPC', 'RES']
+f3_asm = ['NOP', 'XOR', 'COM', 'SHL', 'SHR', 'INCPC','ARTPC', 'HAL']
 
 CD_opt = ['00', '01', '10', '11']
 CD_asm = ['U', 'I', 'S', 'Z']

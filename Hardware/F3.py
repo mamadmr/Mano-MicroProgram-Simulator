@@ -4,7 +4,7 @@ class F3:
     def __init__(self, memory: AllMemory) -> None:
         self.memory = memory
         self.opt = ['000', '001', '010', '011', '100', '101', '110', '111']
-        self.asm = ['NOP', 'XOR', 'COM', 'SHL', 'SHR', 'INCPC','ARTPC', 'RES']
+        self.asm = ['NOP', 'XOR', 'COM', 'SHL', 'SHR', 'INCPC','ARTPC', 'HAL']
         self.func = [self.isz_000, self.isz_001, self.isz_010, self.isz_011, self.isz_100, self.isz_101, self.isz_110, self.isz_111]
     
     def instruction(self, inst):
@@ -47,7 +47,10 @@ class F3:
         self.memory.PC.write(self.memory.AR.read_dec(), "d")
 
     def isz_111(self):
-        pass
+        # HALT
+        print("---------------halt--------------------")
+        input("Enter somthing to exit")
+        exit()
 
 
 if __name__ == "__main__":
