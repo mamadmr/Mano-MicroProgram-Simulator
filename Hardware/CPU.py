@@ -20,8 +20,10 @@ class CPU:
         self.f1.instruction(opt[0:3])
         self.f2.instruction(opt[3:6])
         self.f3.instruction(opt[6:9])
-        self.CD.insruction(opt[9:11])
-        self.BR.insruction(opt[11:13])
+        if self.CD.insruction(opt[9:11]):
+            self.BR.insruction(opt[11:13])
+        else:
+            self.memory.CAR.write(self.memory.CAR.read_dec() + 1, "d")
         if self.memory.check_flags():
             raise("Error in CPU, Write in the same space twice in the same clock cycle")
 
