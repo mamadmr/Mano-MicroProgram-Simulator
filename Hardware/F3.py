@@ -49,8 +49,7 @@ class F3:
     def isz_111(self):
         # HALT
         print("---------------halt--------------------")
-        input("Enter somthing to exit")
-        exit()
+        raise("halt")
 
 
 if __name__ == "__main__":
