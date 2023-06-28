@@ -40,6 +40,20 @@ def load(micro_code, main_code):
 # >help
 # >codes                               done
 
+help = """
+clock <num:decimal>                         : run <num> clock cycles
+clock next command                          : run until next command in main memory
+run                                         : run until halt
+memory <address:decimal>                    : print the value in the address
+registers                                   : print the value of all registers
+write <address:decimal> <value:decimal>     : write the value in the address
+load micro <file_address>                   : load micro code from file
+load main <file_address>                    : load main code from file
+assemble                                    : assemble micro and main code
+quit                                        : quit the simulator
+codes                                       : print the assembled micro and main code
+"""
+
 def show_code(micro_bin, main_bin):
     print("micro code")
     for i in micro_bin:
@@ -121,7 +135,7 @@ def main():
             except:
                 pass
         else:
-            print("command not found")
+            print(help)
 
 if __name__ == "__main__":
     main()
