@@ -14,31 +14,6 @@ class CPU:
         self.CD = CD(self.memory)
         self.BR = BR(self.memory)
         self.memory = memory
-
-    def make_json(self):
-        ans = dict()
-        ans['AC'] = [self.memory.AC.read_dec(), self.memory.AC.read_binary(), self.memory.AC.read_hex()]
-        ans['DR'] = [self.memory.DR.read_dec(), self.memory.DR.read_binary(), self.memory.DR.read_hex()]
-        ans['AR'] = [self.memory.AR.read_dec(), self.memory.AR.read_binary(), self.memory.AR.read_hex()]
-        ans['PC'] = [self.memory.PC.read_dec(), self.memory.PC.read_binary(), self.memory.PC.read_hex()]
-        ans['CAR'] = [self.memory.CAR.read_dec(), self.memory.CAR.read_binary(), self.memory.CAR.read_hex()]
-        ans['SBR'] = [self.memory.SBR.read_dec(), self.memory.SBR.read_binary(), self.memory.SBR.read_hex()]
-        ans['main'] = []
-        ans['micro'] = []
-        for i in self.memory.main_memory.iter():
-            ans['main'].append([i.read_dec(), i.read_binary(), i.read_hex()])
-        
-        for i in self.memory.control_memory.iter():
-            ans['micro'].append([i.read_dec(), i.read_binary(), i.read_hex()])
-        
-        return  json.dumps(ans)
-
-    def json_to_memory(self, file):
-        # convert jason to memory
-        # convert json to dictionary
-        file = json.loads(file)
-        return file
-        #temp = AllMemory()
         
     def clock(self):
         self.memory.reset_flag()
@@ -59,3 +34,4 @@ class CPU:
         print('AR:', self.memory.AR.read_binary())
         print('PC:', self.memory.PC.read_dec())
         print('CAR:', self.memory.CAR.read_dec())
+        print('SBR:', self.memory.SBR.read_dec())
