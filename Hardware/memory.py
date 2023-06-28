@@ -92,6 +92,8 @@ class Memory:
                 return True
         # If no memory blocks have been accessed, return False
         return False
+    def iter(self):
+        yield from self.memory
 
 if __name__ == "__main__":
     # Test the initialization of a new Memory object

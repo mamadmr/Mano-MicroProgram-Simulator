@@ -26,96 +26,102 @@ def load(micro_code, main_code):
     return cpu.CPU(mem)
 
 
+# command line to control simulator 
+# >clock num                           done
+# >clock next command                  done    
+# >run                                 done
+# >memory address                      done
+# >registers                           done
+# >write address value                 done
+# >load mircro file_address            done
+# >load main file_address              done 
+# >assemble                            done
+# >quit                                done
+# >help
+# >codes                               done
 
+def show_code(micro_bin, main_bin):
+    print("micro code")
+    for i in micro_bin:
+        i = i.split('-')
+        print(i[1], i[0])
+    print('--------------------------------------------------')
+    print("main code")
+    for i in main_bin:
+        i = i.split('-')
+        print(i[1], i[0])
+    print('--------------------------------------------------')
 
+def main():
+    micro = None
+    main = None
+    micro_bin = None
+    main_bin = None
+    computer = None
 
+    while True:
+        print("****************************************************")
+        inp = input(">>> ").split()
+        if inp[0] == 'quit':
+            break
+        elif inp[0] == "write":
+            try:
+                computer.memory.main_memory.write(int(inp[1]), int(inp[2]), 'd')
+            except:
+                print("syntax error")
+        elif inp[0] == "load":
+            if inp[1] == 'main':
+                try:
+                    with open(inp[2], 'r') as f:
+                        main = str(f.read())
+                    print(main)
+                except:
+                    print("file not found")
+
+            elif inp[1] == 'micro':
+                try:
+                    with open(inp[2], 'r') as f:
+                        micro = str(f.read())
+                    print(micro)
+                except:
+                    print("file not found")
+            else:
+                print("syntax error") 
+        elif inp[0] == 'assemble':
+            micro_bin, main_bin = assembler.assembler(micro, main)
+            computer = load(micro, main)
+            show_code(micro_bin, main_bin)
+        elif inp[0] == 'clock':
+            computer.clock()
+            if inp[1] == 'next':
+                while computer.memory.CAR.read_dec() != 64:
+                    computer.clock()
+            else:
+                try:
+                    for _ in range(int(inp[1])):
+                        computer.clock()
+                except:
+                    print("syntax error")
+        
+        elif inp[0] == 'register':
+            computer.print_reg()
+        
+        elif inp[0] == 'memory':
+            print(computer.memory.main_memory.read(int(inp[1]), 'd'))
+            try:
+                pass
+            except:
+                print("syntax error")
+        elif inp[0] == 'codes':
+            show_code(micro_bin, main_bin)
+        elif inp[0] == 'run':
+            try:
+                while True:
+                    computer.clock()
+            except:
+                pass
+        else:
+            print("command not found")
 
 if __name__ == "__main__":
-    micro_code = """ORG 0
-    ADD: NOP I CALL INDRCT
-        READ U JMP NEXT
-        ADD U JMP FETCH
-    ORG 4
-    BRANCH: NOP S JMP OVER
-            NOP U JMP FETCH
-    OVER:   NOP I CALL INDRCT
-            ARTPC U JMP FETCH
-    ORG 8
-    STORE: NOP I CALL INDRCT
-           ACTOR U JMP NEXT 
-           WRITE U JMP FETCH
-    ORG 12
-    EXCHANGE:   NOP              I CALL INDRCT
-                READ             U JMP NEXT
-                ACTDR, DRTAC     U JMP NEXT
-                WRITE            U JMP FETCH
-    ORG 16
-    HAL: HAL U JMP
-    ORG 64 
-    FETCH: PCTAR U JMP NEXT
-           READ, INCPC U JMP NEXT
-           DRTAR U JMP MAP
-    INDRCT: READ U JMP NEXT
-            DRTAR U RET"""
-    
-
-    main_code = """ORG 0
-        ADD A1 I
-        ADD A2 
-        ADD A3 
-        STORE DEC100
-        STORE HEXFF
-        STORE BIN1111
-        HAL DEC100
-    ORG 1000
-    A1: DEC1001
-    A2: DEC30
-    A3: DEC40
-    """
-    micro, main = assembler.assembler(micro_code, main_code)
-
-    computer = load(micro_code, main_code)
-    computer.print_reg()
-    for i in range(50):
-        print(i)
-        print('--------------')
-        computer.clock()
-        computer.print_reg()
-    
-
-
-
-    """
-    
-00000000001011000011-0
-00010000000000000010-1
-00100000000001000000-2
-00000000010000000110-4
-00000000000001000000-5
-00000000001011000011-6
-00000011000001000000-7
-00000000001011000011-8
-00000000000000001010-9
-11100000000001000000-10
-00000000001011000011-12
-00010000000000001110-13
-10010100000000001111-14
-11100000000001000000-15
-11000000000001000001-64
-00010010100001000010-65
-10100000000110000000-66
-00010000000001000100-67
-10100000000100000000-68
---------------------
-0000001111101000-0
-0000001111101000-1
-0000001111101000-2
-0001000001100100-3
-0001000011111111-4
-0001000000001111-5
-0000000000010100-1000
-0000000000011110-1001
-0000000000101000-1002
-    
-    
-    """
+    main()
