@@ -34,7 +34,7 @@ class Memory:
             return self.memory[address].read_binary()
         elif type == 'd':
             # Read the value as a decimal integer
-            return self.memory[address].read_dec()
+            return self.memory[address].read_dec(1)
         elif type == 'h':
             # Read the value as a hexadecimal string
             return self.memory[address].read_hex()
