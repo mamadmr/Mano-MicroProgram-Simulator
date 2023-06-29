@@ -21,6 +21,6 @@ ORG 0
     ORG 64 
     FETCH: PCTAR U JMP NEXT
            READ, INCPC U JMP NEXT
-           DRTAR U JMP MAP
+           DRTAR U MAP
     INDRCT: READ U JMP NEXT
             DRTAR U RET
