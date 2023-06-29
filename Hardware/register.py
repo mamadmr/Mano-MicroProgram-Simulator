@@ -20,6 +20,35 @@ class Register:
         # the flag is used to check if the register write more than once in the single clock cycle
         self._flag = 0
 
+    def bin_with_complement_two(self, value: str) -> str:
+        """
+        Convert the value to binary format with complement two.
+
+        :param value: The value to convert.
+        :return: The binary value with complement two.
+
+        The value should be in decimal format.
+        """
+        value = int(value)
+        if value >= 0:
+            return bin(value)
+        else:
+            return bin(2 ** self.number_of_bits + value)
+    def bin_to_dec_complement_two(self, value: str) -> int:
+        """
+        Convert the value to decimal format with complement two.
+
+        :param value: The value to convert.
+        :return: The decimal value with complement two.
+
+        The value should be in binary format.
+        """
+        value = int(value, 2)
+        if value < 2 ** (self.number_of_bits - 1):
+            return value
+        else:
+            return value - 2 ** self.number_of_bits
+    
     def reset_flag(self):
         """
         Reset the flag to 0.
@@ -163,7 +192,7 @@ class Register:
 
         elif type == 'd':
             # If the type is decimal, convert the value to binary
-            self._reg_value = bin(int(value))[2:]
+            self._reg_value = self.bin_with_complement_two(value)[2:]
         elif type == 'h':
             # If the type is hex, convert the value to binary
             # remove the prefix "0h"
@@ -195,14 +224,16 @@ class Register:
         # Add the prefix "0h" to the hexadecimal value
         return '0x' + output 
 
-    def read_dec(self) -> int:
+    def read_dec(self, comp=0) -> int:
         """
         Get the decimal value of the register.
 
         :return: The decimal value of the register.
         """
         # Convert the binary value to decimal
-        return int(self._reg_value, 2)
+        if comp == 0:
+            return int(self._reg_value, 2)
+        return self.bin_to_dec_complement_two(self._reg_value)
 
 
 if __name__ == '__main__':

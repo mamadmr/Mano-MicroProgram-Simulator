@@ -21,7 +21,7 @@ class F3:
 
     def isz_001(self):
         # AC <- AC XOR DR
-        self.memory.AC.write(self.memory.AC.read_dec() ^ self.memory.DR.read_dec(), "d")
+        self.memory.AC.write(self.memory.AC.read_dec(0) ^ self.memory.DR.read_dec(0), "d")
 
     def isz_010(self):
         # AC <- ~AC
