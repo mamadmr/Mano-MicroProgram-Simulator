@@ -29,7 +29,7 @@ class CD:
 
     def Z(self):
         # The Z bit is set to 1 if the AC register is equal to 0
-        return self.mem.AC.read_dec() == 0
+        return self.mem.AC.read_dec(0) == 0
     
 
 class BR:

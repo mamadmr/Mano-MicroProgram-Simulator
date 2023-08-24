@@ -3,7 +3,7 @@ ORG 0
         READ U JMP NEXT
         ADD U JMP FETCH
     ORG 4
-    BRANCH: NOP S JMP OVER
+    BRANCH: NOP Z JMP OVER
             NOP U JMP FETCH
     OVER:   NOP I CALL INDRCT
             ARTPC U JMP FETCH
@@ -16,6 +16,13 @@ ORG 0
                 READ             U JMP NEXT
                 ACTDR, DRTAC     U JMP NEXT
                 WRITE            U JMP FETCH
+    ORG 20
+    LOAD: NOP I CALL INDRCT
+                READ  U JMP FETCH
+    ORG 24
+    SUB: NOP I CALL INDRCT
+         READ U JMP NEXT
+         SUB U JMP FETCH
     ORG 16
     HAL: HAL U JMP
     ORG 64 

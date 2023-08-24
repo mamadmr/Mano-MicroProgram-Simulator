@@ -25,7 +25,6 @@ def load(micro_code, main_code):
     mem.PC.write(0, 'd')
     return cpu.CPU(mem)
 
-
 # command line to control simulator 
 # >clock num                           done
 # >clock next command                  done    
